@@ -1,14 +1,13 @@
-# setting up a client SSH configeration file so that we can connect to server without using a password
-
-include stdlib
-file_line{ 'Declare identity file':
-path 	=> '/etc/ssh/ssh_config',
-line    => '    IdentityFile ~/.ssh/holberton',
-replace => true,
+# Client configuration
+exec { 'Turn off passwd auth':
+  command => 'bash -c "echo PasswordAuthentication no >> /etc/ssh/ssh_config"',
+  path    => '/usr/bin:/usr/sbin:/bin'
 }
-
-file_line { 'Turn off passwd auth':
-path	=>'/etc/ssh/ssh_config',
-line	=>'	PasswordAuthentication no',
-replace =>true,
+exec { 'Declare identity file':
+  command => 'bash -c "echo IdentityFile \'~/.ssh/school\' >> /etc/ssh/ssh_config"',
+  path    => '/usr/bin:/usr/sbin:/bin'
+}
+exec { 'Turn on pubkey auth':
+  command => 'bash -c "echo PubkeyAuthentication yes >> /etc/ssh/ssh_config"',
+  path    => '/usr/bin:/usr/sbin:/bin'
 }
