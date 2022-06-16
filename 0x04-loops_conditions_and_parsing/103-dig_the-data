@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-
-# A Bash sript that groups visitor by IP and HTTP
-# A Bash script that groups visitors by IP and HTTP status code, and displays this data
-awk '{print $1,$9}' < apache-access.log | sort | uniq -c | sort -nr
+# Prints the number of occurrences of the same IP address and
+# HTTP status code of an Apache HTTP request log
+file_name="apache-access.log"
+if test -f $file_name; then
+  awk '{print $1,$9}' $file_name | sort | uniq -c | sort -gr
+fi

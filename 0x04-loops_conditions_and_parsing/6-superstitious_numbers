@@ -1,29 +1,19 @@
 #!/usr/bin/env bash
-# A Bash script that display numbers from 1 to 20 
-
-
-
-printNumbers=1
-while [$printNumbers -lt 21]
-do
-	echo "$printNumbers"
-	case $printNumbers in
-	
-	4)
-		echo "bad luck from China"
-		;;
-	
-	9) 
-		echo "bad luck from Japan"
-		;;
-
-	17)
-		echo "bad luck from Italy"
-		;;
-
-	*)
-		;;
-
-	esac
-	printNumbers=((printNumbers+1))
+# Prints the numbers from 1 to 20 inclusive
+i=0
+while [[ $i -lt 20 ]]; do
+  case "$i" in
+    "3")
+      echo -e "4\nbad luck from China"
+      ;;
+    "8")
+      echo -e "9\nbad luck from Japan"
+      ;;
+    "16")
+      echo -e "17\nbad luck from Italy"
+      ;;
+    *)
+    echo "$((i + 1))"
+  esac
+  i="$((i + 1))"
 done
